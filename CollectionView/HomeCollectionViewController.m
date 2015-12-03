@@ -96,7 +96,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (BOOL)shouldAutorotate{
     //returns true if want to allow orientation change
-    return NO;
+    return YES;
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations{
