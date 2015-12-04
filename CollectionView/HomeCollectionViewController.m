@@ -16,6 +16,7 @@
 
 #import "SKPViewController.h" //pong
 #import "GameViewController.h" //jump
+//#import "ViewController.h" //flappy
 
 
 #import "CollectionView-Swift.h"
@@ -35,11 +36,20 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setBackgroundImage];
+    
     self.dataArray = [[NSMutableArray alloc] init];
     
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     
-    self.backgroundImageView.image = [UIImage animatedImageWithAnimatedGIFURL:[NSURL URLWithString:@"http://i.imgur.com/RuJYgPu.gif"]];
+    
+   
+}
+
+-(void)setBackgroundImage{
+    NSString *pathForGif = [[NSBundle mainBundle] pathForResource: @"BackgroundWarp" ofType: @"gif"];
+    NSData *gifData = [NSData dataWithContentsOfFile: pathForGif];
+    self.backgroundImageView.image = [UIImage animatedImageWithAnimatedGIFData:gifData];
 }
 
 #pragma mark <UICollectionViewDataSource>
@@ -49,7 +59,7 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 5;
+    return 6;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -75,7 +85,8 @@ static NSString * const reuseIdentifier = @"Cell";
     else if (indexPath.row == 2){//jump
         
         GameViewController *jumpVC = [[GameViewController alloc] init];
-        [self.navigationController pushViewController:jumpVC animated:YES];
+        [self presentViewController:jumpVC animated:YES completion:nil];
+//        [self.navigationController pushViewController:jumpVC animated:YES];
     }
     else if (indexPath.row == 3){//space invaders
 
@@ -84,6 +95,14 @@ static NSString * const reuseIdentifier = @"Cell";
     if (indexPath.row == 4) { //calibrate
         [self showCalibrateViewController];
     }
+    
+    if (indexPath.row == 5) { //flappy
+//        CalibrateViewController *flappyVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"FlappyID"];
+//        
+//        [self presentViewController:flappyVC animated:YES completion:nil];
+    }
+    
+    
 }
 
 -(void)showCalibrateViewController{

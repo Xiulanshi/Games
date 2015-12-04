@@ -257,14 +257,11 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory)
     //3 finger touch to quit
     //end game with 3 finger touch
     if ([[event touchesForView:self.view] count] == 3) {
-        NSLog(@"%u active touches",[[event touchesForView:self.view] count]);
-        
-        self.manager.isPlayingJump = NO;
-        
-        UINavigationController *rootViewController = (UINavigationController*)self.view.window.rootViewController;
-        [rootViewController popViewControllerAnimated:YES];
 
+        self.manager.isPlayingJump = NO;
     }
+    
+    [super touchesBegan:touches withEvent:event];
     
     if (self.manager.isLeftRightCalibrated) {
         // 1
@@ -475,7 +472,6 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory)
         [self.lastTenXPositions addObject:[NSNumber numberWithDouble:screenX]];
         
         //set player position to the average of the last positions
-        
         NSNumber * sum = [self.lastTenXPositions valueForKeyPath:@"@sum.self"];
         CGFloat avgX = [sum doubleValue]/(self.lastTenXPositions.count);
         

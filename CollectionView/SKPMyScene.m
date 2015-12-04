@@ -449,7 +449,7 @@ static const uint32_t paddleCategory = 0x1 << 2;
     
     //end game with 3 finger touch
     if ([[event touchesForView:self.view] count] == 3) {
-        NSLog(@"%u active touches",[[event touchesForView:self.view] count]);
+        NSLog(@"%lu active touches",[[event touchesForView:self.view] count]);
         [self removeFromParent];
         [self.view presentScene:nil];
         self.manager.isPlayingPong = NO;
